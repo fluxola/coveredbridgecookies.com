@@ -1,0 +1,16 @@
+stages:
+  - deploy
+
+variables:
+  APP_NAME: cookies
+
+deploy:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: deploy
+  environment:
+    name: production
+    url: https://$APP_NAME.uprootx.com/
+  only:
+    - master
+  script:
+    - git-push ssh://dokku@uprootx.com:22/$APP_NAME
